@@ -4,16 +4,16 @@ LABEL maintainer="Félix MARQUET <felix.mrqt@breizhhardware.fr>"
 # Installation des paquets nécessaires
 RUN apk add --no-cache \
     apache2 \
-    php81-apache2 \
-    php81 \
-    php81-pdo \
-    php81-pdo_pgsql \
-    php81-json \
-    php81-session \
-    php81-mbstring \
-    php81-xml \
-    php81-openssl \
-    php81-curl
+    php82-apache2 \
+    php82\
+    php82-pdo \
+    php82-pdo_pgsql \
+    php82-json \
+    php82-session \
+    php82-mbstring \
+    php82-xml \
+    php82-openssl \
+    php82-curl
 
 # Activation du module rewrite
 RUN sed -i 's/#LoadModule rewrite_module/LoadModule rewrite_module/' /etc/apache2/httpd.conf
