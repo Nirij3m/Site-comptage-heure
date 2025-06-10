@@ -51,6 +51,36 @@ Le `mail` renseigné dans la table sera utilisé pour se connecter, et le `passw
 
 *Addendum sur le nom de domaine de la machine:* Si vous choisissez d'attribuer un nom de domaine à la machine afin d'y accéder (ce qui est fort probable), le nom de domaine de base ne vous permettra pas d'accéder au site. Pour accéder à la page d'accueil, il faut spécifiquement rentrer dans l'URL le nom de domaine + `/accueil` (une simple histoire de routage). Si par exemple le nom de domaine du site est `examplebde.fr` alors pour accéder à la page d'accueil il faudra entrer comme URL `examplebde.fr/accueil`. Si vous entrez juste le nom de domaine de base, vous tomberez sur une page vierge non redirigée (je pense qu'une âme dévouée saura résoudre ce problème en un tour de main).
 
+## Docker
+
+### Utilisation avec Docker Compose
+
+Pour démarrer l'application en utilisant Docker Compose:
+
+```bash
+docker compose up -d
+```
+L'application sera accessible à l'adresse http://localhost/accueil
+
+### Architecture Docker
+Le projet utilise:
+
+- Un conteneur web basé sur Alpine Linux avec Apache et PHP 8.2
+- Un conteneur PostgreSQL pour la base de données
+- Image depuis GitHub Container Registry
+- L'image est automatiquement publiée sur GitHub Container Registry à chaque push sur la branche main.
+
+Pour l'utiliser:
+````BASH
+docker pull ghcr.io/nirij3m/site-comptage-heure:latest
+````
+
+Variables d'environnement
+Le conteneur PostgreSQL utilise les variables suivantes:
+POSTGRES_DB: bdehours
+POSTGRES_USER: postgres
+POSTGRES_PASSWORD: Isen44N
+
 ### FONCTIONNEMENT
 L'utilisation du site une fois déployé est très simple, l'utilisateur se connect à son compte et accès à son "Espace Personnel". Ici il peut entrer la date à laquelle il a travaillé, la durée du temps de travail (timeslot) et enfin un descriptif du travail réalisé. Il peut aussi consulter ses derniers ajouts et leurs statuts (Validé, Refusé, En attente). Un temps de travail est véritablement calculé dans le total d'un utilisateur QUE lorsque un administraterur a validé le timeslot. Les administrateurs ont ainsi en plus accès à un onglet spécifique qui leur permet de consulter les heures en attente de validation, et de les refuser/valider. Cet onglet permet également de consulter l'historique des autres utilisateurs. Un administrateur est défini comme tel dans la table Users grâce au champ `is_admin`.
 
