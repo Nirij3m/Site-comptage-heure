@@ -1,0 +1,32 @@
+services:
+  web:
+    image: ghcr.io/nirij3m/site-comptage-heure:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: bdehours
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Isen44N
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./ressources/CTBDE.sql:/docker-entrypoint-initdb.d/CTBDE.sql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
