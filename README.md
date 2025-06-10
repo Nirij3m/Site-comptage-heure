@@ -72,7 +72,7 @@ Le projet utilise:
 
 Pour l'utiliser:
 ````BASH
-docker pull ghcr.io/breizhhardware/site-comptage-heure:latest
+docker pull ghcr.io/nirij3m/site-comptage-heure:latest
 ````
 
 Variables d'environnement
